@@ -1,6 +1,6 @@
 import { MovieType, Id, Movie } from "../../../shared/types/movie";
 
-import validateSchema from "../../../shared/validate-schema";
+import validateSchema from "../../utils/validate-schema";
 
 type OutsideGetMovie = (id: number) => Promise<MovieType>;
 
@@ -9,12 +9,12 @@ type ReadMovieUseCase = (
   id: number
 ) => Promise<MovieType>;
 
-const validadeReadMovieSchemaRequest = validateSchema(Id.parse);
-const validadeReadMovieSchemaResponse = validateSchema(Movie.parse);
+const validateReadMovieSchemaRequest = validateSchema(Id.parse);
+const validateReadMovieSchemaResponse = validateSchema(Movie.parse);
 
 const readMovieUseCase: ReadMovieUseCase = async (outsideGetMovie, id) => {
-  return validadeReadMovieSchemaResponse(
-    await outsideGetMovie(validadeReadMovieSchemaRequest(id))
+  return validateReadMovieSchemaResponse(
+    await outsideGetMovie(validateReadMovieSchemaRequest(id))
   );
 };
 

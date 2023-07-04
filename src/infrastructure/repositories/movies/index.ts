@@ -3,8 +3,9 @@ import {
   MoviesType,
   MovieType,
   CreateMovieType,
-  MoviesStoredType,
 } from "../../../shared/types/movie";
+
+import { MoviesStored } from "./types";
 
 import {
   createRequest,
@@ -20,7 +21,7 @@ import { mapMoviesStoredToMovies } from "./mapper";
 
 async function getMovies(): Promise<MoviesType> {
   return mapMoviesStoredToMovies(
-    await executeProcedure<MoviesStoredType>(
+    await executeProcedure<MoviesStored>(
       ProcedureEnum.GET_MOVIES,
       createRequest()
     )
@@ -33,7 +34,7 @@ async function getMovie(id: number): Promise<MovieType> {
   setInputNumber(request, PropertyEnum.ID, id);
 
   const movies = mapMoviesStoredToMovies(
-    await executeProcedure<MoviesStoredType>(ProcedureEnum.GET_MOVIE, request)
+    await executeProcedure<MoviesStored>(ProcedureEnum.GET_MOVIE, request)
   );
 
   if (movies[0]) {

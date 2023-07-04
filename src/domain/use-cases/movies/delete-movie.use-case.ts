@@ -1,6 +1,6 @@
 import { Id } from "../../../shared/types/movie";
 
-import validateSchema from "../../../shared/validate-schema";
+import validateSchema from "../../utils/validate-schema";
 
 type OutsideDeleteMovie = (id: number) => Promise<void>;
 
@@ -9,7 +9,7 @@ type DeleteMovieUseCase = (
   id: number
 ) => Promise<void>;
 
-const validateDeleteMovieSchema = validateSchema(Id.parse)
+const validateDeleteMovieSchema = validateSchema(Id.parse);
 
 const deleteMovieUseCase: DeleteMovieUseCase = (outsideDeleteMovie, id) => {
   return outsideDeleteMovie(validateDeleteMovieSchema(id));

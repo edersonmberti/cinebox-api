@@ -1,4 +1,4 @@
-import validateSchema from "../../../shared/validate-schema";
+import validateSchema from "../../utils/validate-schema";
 import { MovieType, Movie } from "../../../shared/types/movie";
 
 type OutsideUpdateMovie = (data: MovieType) => Promise<void>;
@@ -8,7 +8,7 @@ type UpdateMovieUseCase = (
   data: MovieType
 ) => Promise<void>;
 
-const validateUpdateMovieSchema = validateSchema(Movie.parse)
+const validateUpdateMovieSchema = validateSchema(Movie.parse);
 
 const updateMovieUseCase: UpdateMovieUseCase = (outsideUpdateMovie, data) => {
   return outsideUpdateMovie(validateUpdateMovieSchema(data));

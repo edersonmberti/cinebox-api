@@ -1,18 +1,14 @@
 import { z } from "zod";
 
-const Name = z.coerce.string({ required_error: "Name is required" });
+export const Id = z.coerce.number({ required_error: "Id is required" });
 
-export type NameType = z.infer<typeof Name>
+const Name = z.coerce
+  .string({ required_error: "Name is required" })
+  .min(2, "Name need to have minimum 4 characters");
 
 const Description = z
   .string({ required_error: "Description is required" })
   .min(4, "Description need to have minimum 4 characters");
-
-export type DescriptionType = z.infer<typeof Description>
-
-export const Id = z.coerce.number({ required_error: "Id is required" });
-
-export type IdType = z.infer<typeof Id>
 
 export const Movie = z.object({
   id: Id,
@@ -20,27 +16,18 @@ export const Movie = z.object({
   description: Description,
 });
 
-export type MovieType = z.infer<typeof Movie>
+export const CreateMovie = Movie.omit({ id: true });
 
-export const Movies = Movie.array()
+export const Movies = Movie.array();
 
-export type MoviesType = z.infer<typeof Movies>
+export type IdType = z.infer<typeof Id>;
 
-export const MovieStored = z.object({
-  Id,
-  Name,
-  Description,
-})
+export type NameType = z.infer<typeof Name>;
 
-export type MovieStoredType = z.infer<typeof MovieStored>
+export type DescriptionType = z.infer<typeof Description>;
 
-export const MoviesStored = MovieStored.array()
+export type MovieType = z.infer<typeof Movie>;
 
-export type MoviesStoredType = z.infer<typeof MoviesStored>
+export type MoviesType = z.infer<typeof Movies>;
 
-export const CreateMovie = z.object({
-  name: Name,
-  description: Description,
-})
-
-export type CreateMovieType = z.infer<typeof CreateMovie>
+export type CreateMovieType = z.infer<typeof CreateMovie>;
