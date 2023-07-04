@@ -7,10 +7,10 @@ type ReadMoviesUseCase = (
   outsideGetMovies: OutsideGetMovies
 ) => Promise<MoviesType>;
 
-const validateReadMoviesSchemaResponse = validateSchema(Movies.parse);
+const validateOutput = validateSchema(Movies.parse);
 
 const readMoviesUseCase: ReadMoviesUseCase = async (outsideGetMovies) => {
-  return validateReadMoviesSchemaResponse(await outsideGetMovies());
+  return validateOutput(await outsideGetMovies());
 };
 
 export default readMoviesUseCase;

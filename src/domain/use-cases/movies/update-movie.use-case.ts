@@ -8,10 +8,10 @@ type UpdateMovieUseCase = (
   data: MovieType
 ) => Promise<void>;
 
-const validateUpdateMovieSchema = validateSchema(Movie.parse);
+const validateInput = validateSchema(Movie.parse);
 
 const updateMovieUseCase: UpdateMovieUseCase = (outsideUpdateMovie, data) => {
-  return outsideUpdateMovie(validateUpdateMovieSchema(data));
+  return outsideUpdateMovie(validateInput(data));
 };
 
 export default updateMovieUseCase;

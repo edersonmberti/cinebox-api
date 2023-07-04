@@ -9,10 +9,10 @@ type DeleteMovieUseCase = (
   id: number
 ) => Promise<void>;
 
-const validateDeleteMovieSchema = validateSchema(Id.parse);
+const validateInput = validateSchema(Id.parse);
 
 const deleteMovieUseCase: DeleteMovieUseCase = (outsideDeleteMovie, id) => {
-  return outsideDeleteMovie(validateDeleteMovieSchema(id));
+  return outsideDeleteMovie(validateInput(id));
 };
 
 export default deleteMovieUseCase;

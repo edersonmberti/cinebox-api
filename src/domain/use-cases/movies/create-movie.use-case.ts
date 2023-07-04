@@ -9,10 +9,10 @@ type CreateMovieUseCase = (
   data: CreateMovieType
 ) => Promise<void>;
 
-const validateCreateMovieSchema = validateSchema(CreateMovie.parse);
+const validateInput = validateSchema(CreateMovie.parse);
 
 const createMovieUseCase: CreateMovieUseCase = (outsideCreateMovie, data) => {
-  return outsideCreateMovie(validateCreateMovieSchema(data));
+  return outsideCreateMovie(validateInput(data));
 };
 
 export default createMovieUseCase;

@@ -9,13 +9,13 @@ type ReadMovieUseCase = (
   id: number
 ) => Promise<MovieType>;
 
-const validateReadMovieSchemaRequest = validateSchema(Id.parse);
-const validateReadMovieSchemaResponse = validateSchema(Movie.parse);
+const validateInput = validateSchema(Id.parse);
+const validateOutput = validateSchema(Movie.parse);
 
 const readMovieUseCase: ReadMovieUseCase = async (outsideGetMovie, id) => {
-  return validateReadMovieSchemaResponse(
-    await outsideGetMovie(validateReadMovieSchemaRequest(id))
-  );
+  const requestData = validateInput(id);
+  const responseData = await outsideGetMovie(requestData);
+  return validateOutput(responseData);
 };
 
 export default readMovieUseCase;
